@@ -14,17 +14,14 @@ This segment defines a set of global CSS vars in a CSS rule with the :root selec
 body {
     background: var(--bg);
     color: var(--fontColor); 
-    font-family: helvetica; 
+    font-family: monospace; 
 }
 /* ex: the ul selector selects the <ul> HTML element */
 ul { 
-    font-family: helvetica; /* This is a declaration */ 
+    font-family: monospace; /* This is a declaration */ 
     /* "font-family" is the property name and "helvetica" is the value */
 }
 
-li {
-    list-style: circle;
-}
 /* .list is a class selector which selects all elements that contain a class set to 
     list */
 .list { 
