@@ -1,0 +1,63 @@
+/* css file for style */
+/* :root is a selector that represents the <html> element in the HTML page. 
+This segment defines a set of global CSS vars in a CSS rule with the :root selector */
+:root {
+    --green: #00FF00;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+/* each body and ul segments are called rules */
+/* body and ul are selectors of the rules and are used to select which element(s) the 
+    styles apply to */
+/* inside the curly braces are style declarations that 
+    determine what the selected element should look like (see ex: below) */
+body {
+    background: var(--bg);
+    color: var(--fontColor); 
+    font-family: helvetica; 
+}
+/* ex: the ul selector selects the <ul> HTML element */
+ul { 
+    font-family: helvetica; /* This is a declaration */ 
+    /* "font-family" is the property name and "helvetica" is the value */
+}
+
+li {
+    list-style: circle;
+}
+/* .list is a class selector which selects all elements that contain a class set to 
+    list */
+.list { 
+    list-style: square;
+}
+/* #msg is an id selector which selects the HTML element that has its id attribute set
+    to msg */
+ #msg {
+    font-family: monospace; 
+} 
+
+.light-theme {
+    --bg: var(--white); /* bg specifies background */
+    --fontColor: var(--black); /* fontColor specifies font color */
+    --btnBg: var(--black); /* specify button colors in light theme vs. dark theme */
+    --btnFontColor: var(--white);
+}
+
+.dark-theme{
+    --bg: var(--black);
+    --fontColor: var(--white);
+    --btnBg: var(--white);
+    --btnFontColor: var(--black);
+}
+
+.btn { /* make specs for what the button will look like */
+    position: absolute;
+    top: 20px;
+    left: 250px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    color: var(--btnFontColor);
+    background-color: var(--btnBg);
+}
