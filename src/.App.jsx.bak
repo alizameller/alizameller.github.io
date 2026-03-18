@@ -1,0 +1,106 @@
+import React, { useState } from 'react';
+import { Mail, Github, Linkedin, ExternalLink, Play } from 'lucide-react';
+
+export default function App() {
+  const [tab, setTab] = useState('home');
+
+  const styles = {
+    wrapper: { maxWidth: '720px', margin: '0 auto', padding: '160px 24px 100px 24px' },
+    nav: { display: 'flex', gap: '12px', marginBottom: '80px' },
+    navButton: (isActive) => ({
+      background: 'none', border: 'none', cursor: 'pointer',
+      padding: '10px 20px', borderRadius: '8px', fontSize: '1.4rem',
+      color: isActive ? '#ff7800' : '#71717a', fontWeight: isActive ? '600' : '400',
+      transition: 'all 0.2s ease', backgroundColor: isActive ? 'rgba(255, 120, 0, 0.1)' : 'transparent',
+    }),
+    title: { fontSize: '3.5rem', fontWeight: '800', color: '#ffffff', letterSpacing: '-0.05em', marginBottom: '32px' },
+    paragraph: { fontSize: '1.5rem', lineHeight: '1.6', color: '#a1a1aa', marginBottom: '40px' },
+    accent: { color: '#ff7800', fontWeight: '600' },
+    sectionLabel: { fontSize: '1rem', fontWeight: '700', color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '28px', marginTop: '80px', display: 'block' },
+    
+    // Film Grid
+    filmContainer: { display: 'flex', flexDirection: 'column', gap: '40px' },
+    filmImage: { width: '100%', borderRadius: '12px', border: '1px solid #18181b', filter: 'grayscale(20%)', transition: 'filter 0.3s ease' },
+    filmCaption: { marginTop: '12px', fontSize: '1.1rem', color: '#52525b', fontFamily: 'monospace' },
+
+    // Music List
+    playlistRow: { 
+      display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+      padding: '20px 0', borderBottom: '1px solid #18181b', textDecoration: 'none' 
+    }
+  };
+
+  return (
+    <div style={styles.wrapper}>
+      <nav style={styles.nav}>
+        {['home', 'work', 'film', 'music'].map((t) => (
+          <button key={t} onClick={() => setTab(t)} style={styles.navButton(tab === t)}>
+            {t.charAt(0).toUpperCase() + t.slice(1)}
+          </button>
+        ))}
+      </nav>
+
+      {tab === 'home' && (
+        <main>
+          <h1 style={styles.title}>Aliza Meller</h1>
+          <p style={styles.paragraph}>
+            Electrical Engineer & Cybersecurity Software Engineer. Currently 
+            completing an M.Eng at <span style={styles.accent}>The Cooper Union</span> and 
+            engineering decompilers at <span style={styles.accent}>Chip Scan</span>.
+          </p>
+          <div style={{display: 'flex', gap: '32px', marginTop: '40px'}}>
+            <a href="mailto:alizameller@gmail.com" className="social-link accent-link"><Mail size={28}/></a>
+            <a href="https://github.com/alizameller" className="social-link accent-link"><Github size={28}/></a>
+            <a href="https://linkedin.com/in/aliza-meller" className="social-link accent-link"><Linkedin size={28}/></a>
+          </div>
+        </main>
+      )}
+
+      {tab === 'film' && (
+        <main>
+          <h1 style={styles.title}>Photography</h1>
+          <p style={styles.paragraph}>Life on 35mm. Mostly Portra 400 and Tri-X shot around Manhattan.</p>
+          <div style={styles.filmContainer}>
+            {/* TO ADD YOUR PICTURES: 
+                1. Put them in your public/images folder.
+                2. Replace the 'src' below with '/images/your-photo.jpg' 
+            */}
+            <div>
+              <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda" style={styles.filmImage} alt="Film shot" />
+              <div style={styles.filmCaption}>01 — Lower East Side, Portra 400</div>
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1502982722880-0e5a48815039" style={styles.filmImage} alt="Film shot" />
+              <div style={styles.filmCaption}>02 — Cooper Union Lab, Tri-X 400</div>
+            </div>
+          </div>
+        </main>
+      )}
+
+      {tab === 'music' && (
+        <main>
+          <h1 style={styles.title}>Music</h1>
+          <p style={styles.paragraph}>Curated playlists for deep focus and late-night debugging.</p>
+          
+          <a href="YOUR_SPOTIFY_URL_HERE" target="_blank" style={styles.playlistRow} className="project-card">
+            <div>
+              <div style={{color: '#fff', fontSize: '1.4rem', fontWeight: '600'}}>Deep Focus / Engineering</div>
+              <div style={{color: '#71717a', fontSize: '1.1rem', marginTop: '4px'}}>Ambient, Techno, Minimalism</div>
+            </div>
+            <Play size={24} color="#ff7800" fill="#ff7800" />
+          </a>
+
+          <a href="YOUR_SPOTIFY_URL_HERE" target="_blank" style={styles.playlistRow} className="project-card">
+            <div>
+              <div style={{color: '#fff', fontSize: '1.4rem', fontWeight: '600'}}>Analog Mornings</div>
+              <div style={{color: '#71717a', fontSize: '1.1rem', marginTop: '4px'}}>Jazz, Soul, 35mm vibe</div>
+            </div>
+            <Play size={24} color="#ff7800" fill="#ff7800" />
+          </a>
+        </main>
+      )}
+
+      {/* Keep your existing Work tab logic here... */}
+    </div>
+  );
+}
