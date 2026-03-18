@@ -7,7 +7,6 @@ body {
 }
 
 html, body {
-  width: 1200px; /* Matches the viewport tag above */
   margin: 0 auto;
   overflow-x: hidden; /* Prevents any accidental side-wobble */
   -webkit-text-size-adjust: none; /* Prevents Safari from auto-enlarging fonts */
@@ -171,4 +170,32 @@ a:hover {
   color: #52525b;
   font-size: 0.8rem;
   text-transform: uppercase;
+}
+
+/* Container for everything */
+.main-wrapper {
+  max-width: 800px; /* Limits width on desktop */
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fix the Navigation specifically */
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap; /* This is key: it wraps tabs to a new line if the screen is too narrow */
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.nav-button {
+  font-size: clamp(14px, 4vw, 18px); /* Fluid typography: scales between 14px and 18px */
+  padding: 8px 12px;
+}
+
+/* Force text to wrap instead of pushing the screen wide */
+h1, p, li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
