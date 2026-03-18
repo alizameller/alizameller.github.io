@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  background-color: #000000;
+  color: #a1a1aa;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(255, 120, 0, 0.25); /* Deep transparent orange highlight */
+  color: #ff9a4b;                  /* A warmer text selection color */
+}
+
+/* The pulsing orange dot */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ff7800;
+  box-shadow: 0 0 8px rgba(255, 120, 0, 0.5);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.5; transform: scale(1); }
+}
+
+/* Make the active tab text orange instead of white */
+.nav-active {
+  color: #ff7800 !important;
+  background-color: rgba(255, 120, 0, 0.1) !important;
+}
+
+/* Base style for links we want to glow on hover */
+.accent-link {
+  transition: all 0.2s ease;
+}
+
+/* When you hover over an accent link, it glows a subtle orange */
+.accent-link:hover {
+  color: #ff9a4b !important; /* Lighter, glowing orange text */
+  text-shadow: 0 0 10px rgba(255, 120, 0, 0.4); /* Optional "glow" effect */
+}
+
+.social-link {
+  color: #52525b;
+  transition: color 0.2s ease;
+}
+
+.social-link:hover {
+  color: #ffffff;
+}
+
+a, button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+.project-card {
+  padding: 24px 0;
+  border-bottom: 1px solid #18181b;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.project-card:hover {
+  opacity: 0.7;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  #root {
+    padding: 20px;
+  }
+}
+
+/* Animation for the photo entries */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+/* Add this to index.css */
+.photo-fade {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.photo-visible {
+  opacity: 1;
+}
+
+/* This creates a soft 'shimmer' background while the image is downloading */
+.image-loader-bg {
+  background-color: #0a0a0a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.photo-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Optional: Add a dark shimmer background while loading */
+.image-skeleton {
+  background: linear-gradient(90deg, #0a0a0a 25%, #121212 50%, #0a0a0a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.track-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.timestamp {
+  font-family: 'JetBrains Mono', monospace; /* Great for that tech/EE vibe */
+  color: #52525b;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}

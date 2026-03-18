@@ -1,0 +1,162 @@
+import React, { useState } from 'react';
+import { Mail, Github, Linkedin, ArrowUpRight } from 'lucide-react';
+
+export default function App() {
+  const [tab, setTab] = useState('home');
+
+  const styles = {
+    wrapper: {
+      maxWidth: '720px',
+      margin: '0 auto',
+      padding: '160px 24px 100px 24px',
+    },
+    nav: {
+      display: 'flex',
+      gap: '12px', // Slightly tighter gap because buttons are bigger
+      marginBottom: '80px',
+    },
+    navButton: (isActive) => ({
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      padding: '10px 20px', // More padding = bigger "hit" area
+      borderRadius: '8px',
+      fontSize: '1.4rem', // Significantly bigger
+      color: isActive ? '#ff7800' : '#71717a',
+      fontWeight: isActive ? '600' : '400',
+      transition: 'all 0.2s ease',
+      backgroundColor: isActive ? 'rgba(255, 120, 0, 0.1)' : 'transparent',
+    }),
+    title: {
+      fontSize: '3.5rem', // Bumping this even more to match the big nav
+      fontWeight: '800',
+      color: '#ffffff',
+      letterSpacing: '-0.05em',
+      marginBottom: '32px'
+    },
+    paragraph: {
+      fontSize: '1.5rem', // Increased for better readability
+      lineHeight: '1.6',
+      color: '#a1a1aa',
+      marginBottom: '40px'
+    },
+    accent: {
+      color: '#ff7800',
+      fontWeight: '600'
+    },
+    sectionLabel: {
+      display: 'block',
+      fontSize: '1rem', // Bigger label
+      fontWeight: '700',
+      color: '#52525b',
+      textTransform: 'uppercase',
+      letterSpacing: '0.15em',
+      marginBottom: '28px',
+      marginTop: '80px'
+    },
+    row: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '24px 0', // More breathing room
+      borderBottom: '1px solid #18181b'
+    },
+    grid: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '24px',
+      marginTop: '32px'
+    },
+    imagePlaceholder: {
+      width: '100%',
+      aspectRatio: '4/5',
+      backgroundColor: '#0a0a0a',
+      border: '1px solid #18181b',
+      borderRadius: '8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#3f3f46',
+      fontSize: '1.2rem'
+    }
+  };
+
+  return (
+    <div style={styles.wrapper}>
+      <nav style={styles.nav}>
+        <button onClick={() => setTab('home')} style={styles.navButton(tab === 'home')}>Home</button>
+        <button onClick={() => setTab('work')} style={styles.navButton(tab === 'work')}>Work</button>
+        <button onClick={() => setTab('film')} style={styles.navButton(tab === 'film')}>Film</button>
+        <button onClick={() => setTab('music')} style={styles.navButton(tab === 'music')}>Music</button>
+      </nav>
+
+      {tab === 'home' && (
+        <main>
+          <h1 style={styles.title}>Aliza Meller</h1>
+          <p style={styles.paragraph}>
+            Electrical Engineer & Cybersecurity Software Engineer. Currently 
+            completing an M.Eng at <span style={styles.accent}>The Cooper Union</span> and 
+            engineering decompilers at <span style={styles.accent}>Chip Scan</span>.
+          </p>
+          
+          <span style={styles.sectionLabel}>Experience</span>
+          <div style={styles.row}>
+            <span style={{color: '#ececec', fontSize: '1.3rem'}}>Chip Scan</span>
+            <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+              <div className="status-dot"></div>
+              <span style={{color: '#52525b', fontFamily: 'monospace', fontSize: '1.1rem'}}>2024 — P</span>
+            </div>
+          </div>
+          <div style={styles.row}>
+            <span style={{color: '#ececec', fontSize: '1.3rem'}}>Ford Motor Company</span>
+            <span style={{color: '#52525b', fontFamily: 'monospace', fontSize: '1.1rem'}}>2023</span>
+          </div>
+
+          <div style={{display: 'flex', gap: '32px', marginTop: '80px'}}>
+            <a href="mailto:alizameller@gmail.com" className="social-link accent-link"><Mail size={28}/></a>
+            <a href="https://github.com/alizameller" className="social-link accent-link"><Github size={28}/></a>
+            <a href="https://linkedin.com/in/aliza-meller" className="social-link accent-link"><Linkedin size={28}/></a>
+          </div>
+        </main>
+      )}
+
+      {tab === 'work' && (
+        <main>
+          <h1 style={styles.title}>Work</h1>
+          <p style={styles.paragraph}>Technical artifacts across microelectronics and security.</p>
+          <div className="project-card" style={{padding: '32px 0'}}>
+            <h3 style={{color: '#fff', fontSize: '1.8rem', margin: '0 0 12px 0'}}>Oscilloscope TV</h3>
+            <p style={{...styles.paragraph, fontSize: '1.2rem', margin: 0}}>Converting analog hardware into a visual display using NTSC signaling.</p>
+          </div>
+          <div className="project-card" style={{padding: '32px 0'}}>
+            <h3 style={{color: '#fff', fontSize: '1.8rem', margin: '0 0 12px 0'}}>C99 Compiler</h3>
+            <p style={{...styles.paragraph, fontSize: '1.2rem', margin: 0}}>A production-grade compiler targeting x86_64, built with Flex and Bison.</p>
+          </div>
+        </main>
+      )}
+
+      {tab === 'film' && (
+        <main>
+          <h1 style={styles.title}>Photography</h1>
+          <p style={styles.paragraph}>Capturing New York on 35mm. Mostly Portra 400 and Tri-X.</p>
+          <div style={styles.grid}>
+            <div style={styles.imagePlaceholder}>[ 35mm ]</div>
+            <div style={styles.imagePlaceholder}>[ 35mm ]</div>
+          </div>
+        </main>
+      )}
+
+      {tab === 'music' && (
+        <main>
+          <h1 style={styles.title}>Music</h1>
+          <p style={styles.paragraph}>What's currently on rotation in the lab.</p>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px'}}>
+             <div style={{color: '#fff', fontSize: '1.4rem'}}>01. Miles Davis — Kind of Blue</div>
+             <div style={{color: '#71717a', fontSize: '1.4rem'}}>02. Aphex Twin — Selected Ambient Works</div>
+             <div style={{color: '#71717a', fontSize: '1.4rem'}}>03. Floating Points — Elaenia</div>
+          </div>
+        </main>
+      )}
+    </div>
+  );
+}
