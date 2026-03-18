@@ -135,11 +135,13 @@ export default function App() {
       marginTop: '80px'
     },
     row: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '24px 0', // More breathing room
-      borderBottom: '1px solid #18181b'
+        display: 'flex',
+        flexDirection: window.innerWidth < 768 ? 'column' : 'row', // Basic JS toggle
+        justifyContent: 'space-between',
+        alignItems: window.innerWidth < 768 ? 'flex-start' : 'center',
+        gap: '8px',
+        padding: '24px 0',
+        borderBottom: '1px solid #18181b',
     },
     grid: {
       display: 'grid',
@@ -224,7 +226,7 @@ export default function App() {
           <p style={styles.paragraph}>
             Electrical Engineer & Cybersecurity Software Engineer. Currently 
             completing an M.Eng at <a href="https://cooper.edu" style={styles.accent}>The Cooper Union</a> and 
-            working at <br/> <a href="https://chipscan.us" style={styles.accent}>Chip Scan</a>.
+            working at <a href="https://chipscan.us" style={styles.accent}>Chip Scan</a>.
           </p>
           <div style={styles.row}>
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
