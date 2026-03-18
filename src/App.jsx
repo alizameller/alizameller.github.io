@@ -17,7 +17,7 @@ const photos = [
 ];
 
 export default function App() {
-// --- ALL HOOKS MUST LIVE HERE ---
+  // --- ALL HOOKS MUST LIVE HERE ---
   const [tab, setTab] = useState('home');
   const [songs, setSongs] = useState([]);
   const [isChipScanExpanded, setIsChipScanExpanded] = useState(false);
@@ -25,32 +25,42 @@ export default function App() {
 
   // 1. Function to get a fresh Access Token using your Refresh Token
   const getAccessToken = async () => {
-    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-    const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET; // Ensure this is in your .env!
-    const refreshToken = import.meta.env.VITE_SPOTIFY_REFRESH_TOKEN;
+  // 1. Log the presence of variables (don't log the values themselves for security!)
+  console.log("System Check: Checking Spotify Credentials...");
+  console.log("CLIENT_ID status:", import.meta.env.VITE_SPOTIFY_CLIENT_ID ? "✅ Loaded" : "❌ MISSING");
+  console.log("REFRESH_TOKEN status:", import.meta.env.VITE_SPOTIFY_REFRESH_TOKEN ? "✅ Loaded" : "❌ MISSING");
 
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        // Some versions of the API prefer the Auth header instead of body params
-        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
-        },
-        body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken,
-        }),
+  try {
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        // Check if your Basic Auth header is correctly encoded
+        Authorization: `Basic ${btoa(
+          `${import.meta.env.VITE_SPOTIFY_CLIENT_ID}:${import.meta.env.VITE_SPOTIFY_CLIENT_SECRET}`
+        )}`,
+      },
+      body: new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: import.meta.env.VITE_SPOTIFY_REFRESH_TOKEN,
+      }),
     });
 
-    const data = await response.json();
-
-    if (data.error) {
-        console.error("SPOTIFY SAYS:", data.error_description || data.error);
-        return null;
+    if (!response.ok) {
+      const errorData = await response.json();
+      // This will show exactly what Spotify hates (e.g., "invalid_client" or "invalid_grant")
+      console.error("Spotify Auth Failed:", errorData.error, errorData.error_description);
+      throw new Error(`Auth Error: ${errorData.error}`);
     }
 
+    const data = await response.json();
+    console.log("Spotify Auth: Success ✅");
     return data.access_token;
-  };
+  } catch (err) {
+    console.error("Critical Network Error during Spotify Auth:", err);
+    return null;
+  }
+};
 
   // 2. Function to fetch 110 songs
   const fetchSpotifyHistory = async () => {
